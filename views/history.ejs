@@ -1,0 +1,30 @@
+<h2>Link History</h2>
+
+<table>
+  <thead> 
+    <tr>
+      <th><a href="">Original URL</a></th>
+      <th><a href="">Shortened URL</a></th>
+      <th><a href="">Custom Alias</a></th>
+      <th><a href="">QR Code</a></th>
+      <th><a href="">Clicks</a></th>
+      <th><a href="">Created At</a></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% links.forEach(link => { %>
+    <tr>
+      <td><a href="<%= link.originalUrl %>" target="_blank"><%= link.originalUrl %></a></td>
+      <td><a href="/<%= link.shortId %>" target="_blank"><%= link.shortId %></a></td>
+      <td><%= link.customAlias %></td>
+      <td>
+        <% if (link.qrCodeUrl) { %>
+        <img src="<%= link.qrCodeUrl %>" alt="QR Code" width="100">
+        <% } %>
+      </td>
+      <td><%= link.clicks %></td>
+      <td><%= new Date(link.createdAt).toLocaleString() %></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
