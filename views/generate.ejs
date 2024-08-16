@@ -9,5 +9,11 @@
 <body>
     <h1>Your QR Code</h1>
     <img src="<%= src %>" alt="QR Code">
+    
+     <form action="/generate" method="GET">
+    <label for="url">Enter URL:</label>
+    <input type="text" id="url" name="url" placeholder="enter a code" required>
+    <button type="submit">Generate QR Code</button>
+</form>
 </body>
 </html>

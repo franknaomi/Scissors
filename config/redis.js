@@ -1,16 +1,22 @@
-// const redis = require('redis');
-// const { REDIS_HOST, REDIS_PORT, REDIS_PASSWORD } = process.env;
+const redis = require('redis');
 
-// // Create a Redis client
-// const client = redis.createClient({
-//   host: REDIS_HOST || 'localhost',
-//   port: REDIS_PORT || 6379,
-//   password: REDIS_PASSWORD || undefined,
-// });
+// In production, use the hosted Redis URL and port
+const redisHost = process.env.REDIS_HOST || '127.0.0.1';  // Replace with your Redis host in production
+const redisPort = process.env.REDIS_PORT || 6379;         // Replace with your Redis port in production
+const redisPassword = process.env.REDIS_PASSWORD || '';   // Set this if using a managed Redis with auth
 
-// // Handle Redis errors
-// client.on('error', (err) => {
-//   console.error('Redis error:', err);
-// });
+const client = redis.createClient({
+  host: redisHost,
+  port: redisPort,
+  password: redisPassword
+});
 
-// module.exports = client;
+client.on('connect', () => {
+  console.log('Connected to Redis');
+});
+
+client.on('error', (err) => {
+  console.error('Redis connection error:', err);
+});
+
+module.exports = client;

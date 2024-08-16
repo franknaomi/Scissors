@@ -3,7 +3,14 @@
 <h1>QR Code Generator</h1>
  <form action="/generate" method="GET">
     <label for="url">Enter URL:</label>
-    <input type="text" id="url" name="url" placeholder="enter a code" required>
+    <input type="text" id="url" name="url" placeholder="Enter Url" required>
     <button type="submit">Generate QR Code</button>
 </form>
 
+ <form action="/shorten" method="POST">
+    <label for="url">Enter URL:</label>
+    <input type="text" id="url" name="url" placeholder="Enter Url" required>
+    <button type="submit">Shorten Url</button>
+</form>
+
+<a href="/history">View Link History</a>
