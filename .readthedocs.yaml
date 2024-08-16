@@ -1,1 +1,50 @@
 
+# .readthedocs.yaml
+
+version: 2
+
+build:
+  os: ubuntu-22.04  # Use the Ubuntu 22.04 OS
+  tools:
+    python: "3.9"  # Required Python version
+
+sphinx:
+  configuration: docs/conf.py  # Path to your Sphinx configuration file
+
+python:
+  install:
+    - requirements: docs/requirements.txt  # Path to your Python requirements file
+
+conda:  # If you need to use conda environments
+  file: environment.yml  # Conda environment file
+
+formats:
+  - pdf
+  - htmlzip
+  - epub
+
+# Optional environment variables
+build:
+  environment:
+    - NODE_VERSION: "16.x"
+    - NPM_TOKEN: ${NPM_TOKEN}  # Example of using a secure environment variable for NPM
+
+# Install dependencies
+build:
+  jobs:
+    post_install:
+      - apt-get update && apt-get install -y nodejs npm  # Install Node.js and npm
+      - npm install  # Install Node.js dependencies
+
+# Custom build commands
+commands:
+  - npm run docs:build  # Example command to build documentation, replace with your actual command
+
+# Optional build phases
+phases:
+  pre_build:
+    - echo "Running pre-build phase"
+  build:
+    - echo "Building the documentation"
+  post_build:
+    - echo "Post-build phase"
